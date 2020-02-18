@@ -2,46 +2,25 @@
  * @author - Wokoro Douye Samuel
  */
 
-/* eslint-disable class-methods-use-this */
-
 import repository from './repository';
-import {
-  sendSuccessMessage, sendErrorMessage, encryptPassword, filterUserInfo
-} from '../../utils';
+import { sendSuccessMessage } from '../../utils'
 
-/**
- * @class
- */
 class UserController {
-  /**
-   * @description - Function to create new user
-   *
-   * @param {object} param0 - Request body property, with signup values.
-   *
-   * @param {*} res - Express response object.
-   *
-   * @param {*} next - Function to pass controller to next function.
-   *
-   * @return {void} - No return value
-   */
-  async createUser({ body }, res, next) {
-    const { email, password } = body;
+  constructor() {
+    this.repository = repository;
+  }
 
-    body.password = encryptPassword(password);
-
-    const user = await repository.getOne({ email });
-    if (user) {
-      return sendErrorMessage(res, 409, 'User already exists');
-    }
-
+  async createUser({ body }, req, next) {
     try {
-      const dbUser = await repository.create(body);
-      const result = filterUserInfo(dbUser);
+      const { firstname, lastname, email, isadmin, password } = body;
+      const result = await this.repository.create({
+        firstname, lastname, email, isadmin, password
+      });
       sendSuccessMessage(res, 200, result);
-    } catch (e) {
-      next(e);
+    } catch {
+
     }
   }
 }
 
-export default new UserController();
+export default UserController();

@@ -44,6 +44,12 @@ export const clientError = (router) => {
  */
 export const serverError = (router) => {
   router.use((err, req, res) => {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      console.log(err);
+      return sendErrorMessage(
+        res, 409, 'User with email or phone number already exists'
+      );
+    }
     console.log(err);
     return sendErrorMessage(res, 500, 'Internal server error');
   });
