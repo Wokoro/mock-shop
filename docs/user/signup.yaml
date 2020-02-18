@@ -1,43 +1,69 @@
 paths:
-  api/v1/signup:
+  /api/v1/signup:
     post:
-      description: User signup endpoint
-
+      summary: User signup endpoint
+      tags:
+        - User
+      operationId: createUser
       produces:
         - application/json
-
       parameters:
-        - name: Authorization
-          description: Bearer token
-          in: body
-          required: true
-          type: string
         - name: firstname
-          description: First name of user
-          in: body
-          required: true
+          in: formData
           type: string
-        - name: lastname
-          description: Last name of user
-          in: body
           required: true
-          type: string
-        - name: email
-          description: Email of user
-          in: body
-          required: true
-          type: string
-        - name: password
-          description: Password of user
-          in: body
-          required: true
-          type: string
+          summary: "User's firstname"
 
+        - name: lastname
+          in: formData
+          type: string
+          required: true
+          summary: "User's lastname"
+
+        - name: email
+          in: formData
+          type: string
+          required: true
+          summary: "User's email"
+
+        - name: password
+          in: formData
+          type: string
+          required: true
+          summary: "User's passowrd"
       responses:
         200:
           description: Successful user signup
           content:
-            application/json:
-              schema:
-                type: string
-                example: pong
+            application/json
+          schema:
+            example:
+              status: "sucess"
+              data:
+                firstname: "samuel"
+                lastname: "douye"
+                email: "samueldouye@yahoo.com"
+                isadmin: false
+                createdAt: "2020-02-19T01:17:13.838Z"
+                updatedAt: "2020-02-19T01:17:13.838Z"
+
+        406:
+          description: Unacceptable inputs
+          content:
+            application/json
+          schema:
+            example:
+              status: "error"
+              error:
+                - firstname: "Firstname must be valid"
+                  lastname: "Lastname must be valid"
+                  email: "Email must be valid"
+
+        409:
+          description: Conflicting accounts
+          content:
+            application/json
+          schema:
+            example:
+              status: "error"
+              error: "User already exists"

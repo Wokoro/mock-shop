@@ -3,8 +3,10 @@
  */
 
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 
 dotenv.config();
+
 
 /**
  * @description - A function to load all high level middlewares
@@ -67,4 +69,37 @@ export const sendSuccessMessage = (res, code, data) => res.status(code).send({
 export const sendErrorMessage = (res, code, error) => res.status(code).send({
   status: 'error',
   error
+});
+
+
+/**
+ * @description - Function to encrypt user password
+ *
+ * @param {string} password - User's plain password to encrypt
+ *
+ * @returns {object} - Returns the encrypted password
+ */
+export const encryptPassword = password => bcrypt.hashSync(password, 10);
+
+/**
+ * @description - Function to filter user account details
+ *
+ * @param {string} param0 - User's firstname
+ *
+ * @param {string} param1 - User's lastname
+ *
+ * @param {boolean} param2 - User's isadmin
+ *
+ * @param {string} param3 - User's account creation time
+ *
+ * @param {string} param4 - User's account update time
+ *
+ * @returns {object} - Returns filtered user details
+ */
+export const filterUserInfo = (
+  {
+    firstname, lastname, email, isadmin, createdAt, updatedAt
+  }
+) => ({
+  firstname, lastname, email, isadmin, createdAt, updatedAt
 });

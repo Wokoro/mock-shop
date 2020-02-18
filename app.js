@@ -10,9 +10,9 @@ import errorHandlers from './middlewares/errors.handlers';
 import { middlewareLoader, routesLoader } from './utils';
 import docs from './docs';
 
+const app = express();
 const router = express.Router();
 
-const app = express();
 app.use('/api/v1', router);
 
 process.on('uncaughtException', (error) => {
@@ -26,6 +26,5 @@ middlewareLoader(middlewares, router);
 routesLoader(routes, router);
 routesLoader(docs, router);
 middlewareLoader(errorHandlers, router);
-
 
 export default app;

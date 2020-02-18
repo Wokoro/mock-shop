@@ -2,12 +2,13 @@
  * @author - Wokoro Douye Samuel
  */
 
-import controller from './controller'
+import controller from './controller';
+import validations from './validation';
 
- export default [
-   {
-     path: '/signup',
-     method: 'post',
-     handlers: [controller.createUser]
-   }
- ]
+export default [
+  {
+    path: '/signup',
+    method: 'post',
+    handlers: [...validations, controller.createUser]
+  }
+];
