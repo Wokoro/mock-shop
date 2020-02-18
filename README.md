@@ -22,7 +22,7 @@ npm start
 ```
 
 ## Usage
-Moch Shop API is hosted on Heroku [here](https://dashboard.heroku.com/apps/moch-shop/api/v1/docs). Click on the link to access Moch Shop API docs easily.
+Moch Shop API is hosted on Heroku [here](https://moch-shop.herokuapp.com/api/v1/docs/). Click on the link to access Moch Shop API docs easily.
 
 To use the API, make requests to the endpoints supported by Moch Shop and get your responses as JSON objects ready to use in the frontend.
 
