@@ -1,0 +1,43 @@
+paths:
+  api/v1/signup:
+    post:
+      description: User signup endpoint
+
+      produces:
+        - application/json
+
+      parameters:
+        - name: Authorization
+          description: Bearer token
+          in: body
+          required: true
+          type: string
+        - name: firstname
+          description: First name of user
+          in: body
+          required: true
+          type: string
+        - name: lastname
+          description: Last name of user
+          in: body
+          required: true
+          type: string
+        - name: email
+          description: Email of user
+          in: body
+          required: true
+          type: string
+        - name: password
+          description: Password of user
+          in: body
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Successful user signup
+          content:
+            application/json:
+              schema:
+                type: string
+                example: pong
