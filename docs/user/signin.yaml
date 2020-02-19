@@ -1,0 +1,47 @@
+paths:
+  /api/v1/signin:
+    post:
+      summary: User signin endpoint
+      tags:
+        - User
+      operationId: signinUser
+      produces:
+        - application/json
+      parameters:
+        - name: email
+          in: formData
+          type: string
+          required: true
+          summary: "User's email"
+
+        - name: password
+          in: formData
+          type: string
+          required: true
+          summary: "User's passowrd"
+      responses:
+        200:
+          description: Successful user signin
+          content:
+            application/json
+          schema:
+            example:
+              status: "sucess"
+              data:
+                firstname: "samuel"
+                lastname: "douye"
+                email: "samueldouye@yahoo.com"
+                isadmin: false
+                createdAt: "2020-02-19T01:17:13.838Z"
+                updatedAt: "2020-02-19T01:17:13.838Z"
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvdXllNUBnbWFpbC5jb20iLCJpc2FkbWluIjpmYWxzZSwiaWF0IjoxNTgyMDY3NjU3fQ.3SUoBFM49u3UGy1SxfnDOiX4EWhhAgOxsgUX7D6_7M8"
+
+        401:
+          description: Unauthorized client
+          content:
+            application/json
+          schema:
+            example:
+              status: "error"
+              error: "User name or password incorrect"
+
